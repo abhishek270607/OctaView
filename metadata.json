@@ -1,0 +1,6 @@
+{
+  "name": "OctoView - GitHub Code Explorer & AI Companion",
+  "description": "Explore GitHub repositories with interactive file previews, syntax highlighting, architecture topology maps, and AI code explanations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

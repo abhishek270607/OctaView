@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OctoView - GitHub Code Explorer & AI Companion</title>
+    <meta name="description" content="Explore GitHub repositories with interactive file previews, syntax highlighting, architecture topology maps, and AI code explanations." />
+    <meta property="og:title" content="OctoView - GitHub Code Explorer & AI Companion" />
+    <meta property="og:description" content="Explore GitHub repositories with interactive file previews, syntax highlighting, architecture topology maps, and AI code explanations." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script>
+      // Suppress Vite HMR WebSocket errors in sandboxed / iframe environments where HMR is disabled
+      window.addEventListener('error', function (event) {
+        if (
+          event?.message?.includes('WebSocket') ||
+          event?.filename?.includes('@vite/client') ||
+          (typeof event?.error?.stack === 'string' && (event.error.stack.includes('@vite/client') || event.error.stack.includes('createWebSocketModuleRunnerTransport')))
+        ) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', function (event) {
+        if (
+          event?.reason?.message?.includes('WebSocket') ||
+          (typeof event?.reason?.stack === 'string' && event.reason.stack.includes('@vite/client'))
+        ) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      }, true);
+    </script>
+  </head>
+  <body class="bg-[#090D16] text-slate-100 antialiased selection:bg-sky-500/30 selection:text-sky-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

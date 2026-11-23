@@ -1,0 +1,136 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with token credits balance and account details",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Unique Firebase user authentication ID"
+        },
+        "email": {
+          "type": "string",
+          "description": "User Google email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "User avatar photo URL"
+        },
+        "tokensRemaining": {
+          "type": "number",
+          "description": "Task tokens remaining for AI code tasks"
+        },
+        "totalTokensUsed": {
+          "type": "number",
+          "description": "Lifetime tokens exhausted on tasks"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Account initialization timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last activity or token update timestamp"
+        }
+      },
+      "required": ["uid", "tokensRemaining"]
+    },
+    "TokenTransaction": {
+      "title": "TokenTransaction",
+      "description": "Audit record of task execution and token consumption",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique transaction ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID performing the task"
+        },
+        "taskType": {
+          "type": "string",
+          "description": "Type of task: explain_file, architecture_map, ask_ai, etc."
+        },
+        "tokensDeducted": {
+          "type": "number",
+          "description": "Number of tokens exhausted by the task"
+        },
+        "remainingBalance": {
+          "type": "number",
+          "description": "Tokens remaining after task completion"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable label of task performed"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Transaction timestamp"
+        }
+      },
+      "required": ["userId", "taskType", "tokensDeducted"]
+    },
+    "StarredRepo": {
+      "title": "StarredRepo",
+      "description": "Bookmarked repository saved to user profile",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique sanitized repository identifier"
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID who starred the repository"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Full repository name (e.g. facebook/react)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Repository description"
+        },
+        "stars": {
+          "type": "number",
+          "description": "Stargazer count"
+        },
+        "language": {
+          "type": "string",
+          "description": "Primary programming language"
+        },
+        "starredAt": {
+          "type": "string",
+          "description": "Timestamp when bookmarked"
+        }
+      },
+      "required": ["userId", "fullName"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "Stores user profile and token balance"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": {
+        "$ref": "#/entities/TokenTransaction"
+      },
+      "description": "Stores user token deduction logs"
+    },
+    "/users/{userId}/starredRepos/{repoId}": {
+      "schema": {
+        "$ref": "#/entities/StarredRepo"
+      },
+      "description": "Stores user starred and bookmarked repositories"
+    }
+  }
+}
